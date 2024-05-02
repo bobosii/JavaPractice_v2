@@ -9,6 +9,8 @@ public class Store {
     ArrayList<Notebook> notebooks;
     public void store(){
         brands = new TreeSet<>(Comparator.comparing(Brand::getName));
+        cellPhones = new ArrayList<>();
+        notebooks = new ArrayList<>();
         Brand samsung = new Brand("Samsung");
         Brand lenovo = new Brand("Lenovo");
         Brand apple = new Brand("Apple");
@@ -68,9 +70,11 @@ public class Store {
             switch (select){
                 case 1:
                     System.out.println("Notebook işlemleri");
+                    listNotebooks(notebooks);
                     break;
                 case 2:
                     System.out.println("Cep telefonu işlemleri");
+                    listCellPhones(cellPhones);
                     break;
                 case 3:
                     listMenu(brands);
@@ -87,11 +91,28 @@ public class Store {
 
     }
 
+    public void listNotebooks(ArrayList<Notebook> notebooks){
+        System.out.println("Notebooklar listeleniyor...");
+        for (Notebook notebook: notebooks){
+            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("ID : "+ notebook.getId() +", İsim : " +notebook.getBrand().getName()+ " " +notebook.getName() +
+                    ", Fiyat : " + notebook.getPrice() + " TL"+ ", Marka : " + notebook.getBrand().getName()
+                    + ", Ekran : " + notebook.getScreenSize() +
+                    ", Ram : " + notebook.getRam());
+        }
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+    }
+
     public void listCellPhones(ArrayList<CellPhone> cellPhones){
         System.out.println("Telefonlar listeleniyor..");
         for (CellPhone cellPhone: cellPhones){
-            System.out.println(cellPhone.getName() + ", "  ); //  Continue this think.
+            System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
+            System.out.println("ID : "+ cellPhone.getId() +", İsim : " +cellPhone.getBrand().getName()+ " " +cellPhone.getName() +
+                    ", Fiyat : " + cellPhone.getPrice() + " TL" + ", Marka : " + cellPhone.getBrand().getName() + ", Depolama : " + cellPhone.getMemory()
+            + ", Ekran : " + cellPhone.getScreenSize() + ", Pil : " + cellPhone.getBatteryCapacity() +
+                    ", Ram : " + cellPhone.getRam() + ", Renk : " + cellPhone.getColor());
         }
+        System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
 
 

@@ -23,6 +23,7 @@ public class Product {
         this.ram = ram;
     }
 
+
     public int getId() {
         return id;
     }
