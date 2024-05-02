@@ -67,17 +67,21 @@ public class Store {
             System.out.println("3- Markaları listele");
             System.out.println("0- Çıkış");
             int select = inp.nextInt();
+            int selectPhoneProcess;
+            int selectNotebookProcess;
             switch (select){
                 case 1:
                     System.out.println("Notebook işlemleri");
                     listNotebooks(notebooks);
+                    addNotebook(notebooks);
                     break;
                 case 2:
                     System.out.println("Cep telefonu işlemleri");
                     listCellPhones(cellPhones);
+                    addCellPhone(cellPhones);
                     break;
                 case 3:
-                    listMenu(brands);
+                    listBrands(brands);
                     break;
                 case 0:
                     System.out.println("Tekrar bekleriz <3");
@@ -91,6 +95,7 @@ public class Store {
 
     }
 
+
     public void listNotebooks(ArrayList<Notebook> notebooks){
         System.out.println("Notebooklar listeleniyor...");
         for (Notebook notebook: notebooks){
@@ -98,7 +103,7 @@ public class Store {
             System.out.println("ID : "+ notebook.getId() +", İsim : " +notebook.getBrand().getName()+ " " +notebook.getName() +
                     ", Fiyat : " + notebook.getPrice() + " TL"+ ", Marka : " + notebook.getBrand().getName()
                     + ", Ekran : " + notebook.getScreenSize() +
-                    ", Ram : " + notebook.getRam());
+                    ", Ram : " + notebook.getRam() + " GB");
         }
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
@@ -108,17 +113,102 @@ public class Store {
         for (CellPhone cellPhone: cellPhones){
             System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
             System.out.println("ID : "+ cellPhone.getId() +", İsim : " +cellPhone.getBrand().getName()+ " " +cellPhone.getName() +
-                    ", Fiyat : " + cellPhone.getPrice() + " TL" + ", Marka : " + cellPhone.getBrand().getName() + ", Depolama : " + cellPhone.getMemory()
+                    ", Fiyat : " + cellPhone.getPrice() + " TL" + ", Marka : " + cellPhone.getBrand().getName() + ", Depolama : " + cellPhone.getMemory() + " GB"
             + ", Ekran : " + cellPhone.getScreenSize() + ", Pil : " + cellPhone.getBatteryCapacity() +
-                    ", Ram : " + cellPhone.getRam() + ", Renk : " + cellPhone.getColor());
+                    ", Ram : " + cellPhone.getRam() +" GB" +", Renk : " + cellPhone.getColor());
         }
         System.out.println("----------------------------------------------------------------------------------------------------------------------------------------------------------------------------");
     }
+    public void addCellPhone(ArrayList<CellPhone> cellPhones){
+        Scanner inp = new Scanner(System.in);
+        System.out.print("Telefon adını giriniz : ");
+        String selectedName = inp.nextLine();
+        System.out.print("Ürünün fiyatını giriniz : ");
+        int selectedPrice = inp.nextInt();
+        inp.nextLine();
+        System.out.print("Ürünün depolama kapasitesini giriniz : ");
+        String selectedMemory = inp.nextLine();
+        System.out.print("Ürünün ekran boyutlarını giriniz : ");
+        String selectedScreenSize = inp.nextLine();
+        System.out.print("Ürünün pil kapasitesini giriniz : ");
+        int selectedBatteryCapacity = inp.nextInt();
+        inp.nextLine();
+        System.out.print("Ürünün Ram kapasitesini giriniz : ");
+        String selectedRam = inp.nextLine();
+        System.out.print("Ürünün rengini giriniz : ");
+        String selectedColor = inp.nextLine();
+        System.out.print("Ürünün indirim miktarını giriniz : ");
+        int selectedDiscount = inp.nextInt();
+        inp.nextLine();
+        System.out.print("Ürünün stok miktarını giriniz : ");
+        int selectedStock = inp.nextInt();
+        inp.nextLine();
+        System.out.println("Marka ID'si: ");
+        listBrandsWithId(brands);
+        System.out.println("Marka ID'si seçiniz ");
+        int brandId = inp.nextInt();
+        // Seçilen markayı bul
+        Brand selectedBrand = null;
+        for (Brand brand : brands) {
+            if (brand.getId() == brandId) {
+                selectedBrand = brand;
+                break;
+            }
+        }
+        if (selectedBrand == null) {
+            System.out.println("Geçersiz marka ID'si. Cep telefonu eklenemedi.");
+        }else {
+            CellPhone newPhone = new CellPhone(selectedName,selectedBrand,selectedPrice,selectedDiscount,selectedStock,selectedScreenSize,selectedRam,selectedColor,selectedBatteryCapacity,selectedMemory);
+            cellPhones.add(newPhone);
+        }
+    }
+    public void addNotebook(ArrayList<Notebook> notebooks){
+        Scanner inp = new Scanner(System.in);
+        System.out.print("Ürünün adını giriniz : ");
+        String selectedName = inp.nextLine();
+        System.out.print("Ürünün fiyatını giriniz : ");
+        int selectedPrice = inp.nextInt();
+        inp.nextLine();
+        System.out.print("Ürünün ekran boyutlarını giriniz : ");
+        String selectedScreenSize = inp.nextLine();
+        inp.nextLine();
+        System.out.print("Ürünün Ram kapasitesini giriniz : ");
+        String selectedRam = inp.nextLine();
+        System.out.print("Ürünün indirim miktarını giriniz : ");
+        int selectedDiscount = inp.nextInt();
+        inp.nextLine();
+        System.out.print("Ürünün stok miktarını giriniz : ");
+        int selectedStock = inp.nextInt();
+        inp.nextLine();
+        System.out.println("Marka ID'si: ");
+        listBrandsWithId(brands);
+        System.out.println("Marka ID'si seçiniz ");
+        int brandId = inp.nextInt();
+        // Seçilen markayı bul
+        Brand selectedBrand = null;
+        for (Brand brand : brands) {
+            if (brand.getId() == brandId) {
+                selectedBrand = brand;
+                break;
+            }
+        }
+        if (selectedBrand == null) {
+            System.out.println("Geçersiz marka ID'si. Cep telefonu eklenemedi.");
+        }else {
+            Notebook newNotebook = new Notebook(selectedName,selectedBrand,selectedPrice,selectedDiscount,selectedStock,selectedScreenSize,selectedRam);
+            notebooks.add(newNotebook);
+        }
+    }
 
 
-    public void listMenu(Set<Brand> brands){
+    public void listBrands(Set<Brand> brands){
         for (Brand brand: brands){
             System.out.println("- " + brand.getName());
+        }
+    }
+    public void listBrandsWithId(Set<Brand> brands){
+        for (Brand brand: brands){
+            System.out.println("-" + brand.getId() + " " + brand.getName());
         }
     }
 }

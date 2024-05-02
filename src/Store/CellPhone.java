@@ -1,6 +1,8 @@
 package Store;
 
 public class CellPhone extends Product{
+    private int id;
+    private int nextId = 1;
     private String color;
     private int batteryCapacity;
     private String memory;
@@ -11,6 +13,8 @@ public class CellPhone extends Product{
         this.color = color;
         this.batteryCapacity = batteryCapacity;
         this.memory = memory;
+        this.id = nextId;
+        nextId++;
     }
 
     public String getMemory() {
@@ -47,5 +51,21 @@ public class CellPhone extends Product{
                ", Pil : " + this.getBatteryCapacity() +
                ", Ram : " + this.getRam() +
                ", Renk : " + this.getColor();
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getNextId() {
+        return nextId;
+    }
+
+    public void setNextId(int nextId) {
+        this.nextId = nextId;
     }
 }

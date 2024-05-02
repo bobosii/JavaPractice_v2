@@ -1,7 +1,6 @@
 package Store;
 
 public class Product {
-    private int id;
     private String name;
     private Brand brand;
     private double price;
@@ -9,11 +8,8 @@ public class Product {
     private int stock;
     private String screenSize;
     private String ram;
-    private int nextId = 1;
 
     public Product(String name, Brand brand, double price, int discount, int stock, String screenSize, String ram) {
-        this.id = nextId;
-        nextId++;
         this.name = name;
         this.brand = brand;
         this.price = price;
@@ -24,13 +20,7 @@ public class Product {
     }
 
 
-    public int getId() {
-        return id;
-    }
 
-    public void setId(int id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
