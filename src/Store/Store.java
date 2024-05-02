@@ -71,14 +71,47 @@ public class Store {
             int selectNotebookProcess;
             switch (select){
                 case 1:
-                    System.out.println("Notebook işlemleri");
-                    listNotebooks(notebooks);
-                    addNotebook(notebooks);
+                    listAddOrRemove();
+                    selectNotebookProcess = inp.nextInt();
+                    switch (selectNotebookProcess){
+                        case 1:
+                            listNotebooks(notebooks);
+                            break;
+                        case 2:
+                            addNotebook(notebooks);
+                            break;
+                        case 3:
+                            System.out.println("Notebook silme işlemi");
+                            removeItemNotebook(notebooks);
+                            break;
+                        case 0:
+                            break;
+                        default:
+                            System.out.println("Lütfen doğru seçim yapınız !");
+                            break;
+                    }
                     break;
                 case 2:
                     System.out.println("Cep telefonu işlemleri");
-                    listCellPhones(cellPhones);
-                    addCellPhone(cellPhones);
+                    listAddOrRemove();
+                    selectPhoneProcess = inp.nextInt();
+                    switch (selectPhoneProcess){
+                        case 1:
+                            listCellPhones(cellPhones);
+                            break;
+                        case 2:
+                            addCellPhone(cellPhones);
+                            break;
+                        case 3:
+                            System.out.println("Ürün silme işlemleri");
+                            removeItemCellPhone(cellPhones);
+                            break;
+                        case 0:
+                            break;
+                        default:
+                            System.out.println("Lütfen doğru seçimi yapınız");
+                            break;
+                    }
                     break;
                 case 3:
                     listBrands(brands);
@@ -93,6 +126,62 @@ public class Store {
             }
         }
 
+    }
+    public void removeItemNotebook(ArrayList<Notebook> notebooks){
+        listNotebooks(notebooks);
+        Scanner inp = new Scanner(System.in);
+        System.out.print("Silmek istediğiniz Notebook'un ID'sini giriniz : ");
+        int wantRemoveId = inp.nextInt();
+        inp.nextLine();
+        System.out.println("Silmek istediğiniz ürün --->");
+        System.out.println(notebooks.get(wantRemoveId-1));
+        System.out.println("Silmek istediğinize emin misiniz E/H");
+        String choice = inp.nextLine().toUpperCase();
+        inp.nextLine();
+        if (choice.equals("E")){
+            notebooks.remove(wantRemoveId-1);
+            System.out.println("Ürün başarıyla silindi !!");
+            for (int i = wantRemoveId - 1; i < notebooks.size(); i++) {
+                notebooks.get(i).setId(i + 1);
+            }
+        }else if(choice.equals("H")) {
+            System.out.println("Ürün silinmedi !!!");
+        }else {
+            System.out.println("Doğru seçim yapmadınız !!!");
+        }
+    }
+
+    public void removeItemCellPhone(ArrayList<CellPhone> cellPhones){
+        listCellPhones(cellPhones);
+        Scanner inp = new Scanner(System.in);
+        System.out.print("Silmek istediğiniz telefonun ID'sini giriniz : ");
+        int wantRemoveId = inp.nextInt();
+        inp.nextLine();
+        System.out.println("Silmek istediğiniz ürün --->");
+        System.out.println(cellPhones.get(wantRemoveId-1));
+        System.out.println("Silmek istediğinize emin misiniz E/H");
+        String choice = inp.nextLine().toUpperCase();
+        inp.nextLine();
+        if (choice.equals("E")){
+            cellPhones.remove(wantRemoveId-1);
+            System.out.println("Ürün başarıyla silindi !!");
+            for (int i = wantRemoveId - 1; i < cellPhones.size(); i++) {
+                cellPhones.get(i).setId(i + 1);
+            }
+        }else if(choice.equals("H")) {
+            System.out.println("Ürün silinmedi !!!");
+        }else {
+            System.out.println("Doğru seçim yapmadınız !!!");
+        }
+
+    }
+
+
+    public void listAddOrRemove(){
+        System.out.println("1- Ürünleri listele");
+        System.out.println("2- Ürün ekle");
+        System.out.println("3- Ürün sil");
+        System.out.println("0- Çıkış");
     }
 
 
@@ -171,7 +260,6 @@ public class Store {
         inp.nextLine();
         System.out.print("Ürünün ekran boyutlarını giriniz : ");
         String selectedScreenSize = inp.nextLine();
-        inp.nextLine();
         System.out.print("Ürünün Ram kapasitesini giriniz : ");
         String selectedRam = inp.nextLine();
         System.out.print("Ürünün indirim miktarını giriniz : ");

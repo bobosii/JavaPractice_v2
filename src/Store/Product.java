@@ -8,6 +8,8 @@ public class Product {
     private int stock;
     private String screenSize;
     private String ram;
+    private static int nextId = 1;
+    protected int id;
 
     public Product(String name, Brand brand, double price, int discount, int stock, String screenSize, String ram) {
         this.name = name;
@@ -17,6 +19,8 @@ public class Product {
         this.stock = stock;
         this.screenSize = screenSize;
         this.ram = ram;
+        this.id = nextId;
+        nextId++;
     }
 
 

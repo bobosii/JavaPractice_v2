@@ -2,7 +2,7 @@ package Store;
 
 public class CellPhone extends Product{
     private int id;
-    private int nextId = 1;
+    private static int nextId = 1;
     private String color;
     private int batteryCapacity;
     private String memory;
@@ -43,9 +43,9 @@ public class CellPhone extends Product{
 
     public String toString(){
        return  "ID : " + this.getId() +
-                "Ürün adı : " + this.getName() +
+                ", Ürün adı : " + this.getName() +
                 ", Fiyat : " + this.getPrice() +
-                ", Marka : " + this.getBrand() +
+                ", Marka : " + this.getBrand().getName() +
                 ", Depolama " + this.getMemory() +
                ", Ekran : " + this.getScreenSize() +
                ", Pil : " + this.getBatteryCapacity() +
@@ -68,4 +68,6 @@ public class CellPhone extends Product{
     public void setNextId(int nextId) {
         this.nextId = nextId;
     }
+
+
 }
