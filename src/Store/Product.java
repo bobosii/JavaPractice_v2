@@ -4,14 +4,16 @@ public class Product {
     private int id;
     private String name;
     private Brand brand;
-    private int price;
+    private double price;
     private int discount;
     private int stock;
     private String screenSize;
     private String ram;
+    private int nextId = 1;
 
-    public Product(int id, String name, Brand brand, int price, int discount, int stock, String screenSize, String ram) {
-        this.id = id;
+    public Product(String name, Brand brand, double price, int discount, int stock, String screenSize, String ram) {
+        this.id = nextId;
+        nextId++;
         this.name = name;
         this.brand = brand;
         this.price = price;
@@ -45,11 +47,11 @@ public class Product {
         this.brand = brand;
     }
 
-    public int getPrice() {
+    public double getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -83,4 +85,5 @@ public class Product {
     public void setRam(String ram) {
         this.ram = ram;
     }
+
 }

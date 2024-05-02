@@ -5,7 +5,8 @@ import java.util.*;
 
 public class Store {
     Set<Brand> brands;
-    ArrayList<Product> products;
+    ArrayList<CellPhone> cellPhones;
+    ArrayList<Notebook> notebooks;
     public void store(){
         brands = new TreeSet<>(Comparator.comparing(Brand::getName));
         Brand samsung = new Brand("Samsung");
@@ -27,8 +28,28 @@ public class Store {
         brands.add(xiaomi);
         brands.add(monster);
 
+        CellPhone iphone = new CellPhone("İphone 11",apple,7379,
+                0,1,"6.1",
+                "8 GB","Mavi", 4000,"64 GB");
 
+        CellPhone galaxy = new CellPhone("Galaxy A51",samsung,3199,
+                0,1,"6.5",
+                "6 GB","Siyah",4000,"128 GB");
 
+        CellPhone redmi = new CellPhone("Redmi Note 10 Pro 8GB",xiaomi,4012,
+                0,1,"6.5","12 GB",
+                "Beyaz",4000,"128 GB");
+
+        Notebook mateBook = new Notebook("Matebook 14",huawei,7000,0,1,"14.0","16 GB");
+        Notebook v14IGL = new Notebook("V14 IGL",lenovo,3699,0,1,"14.0","14");
+        Notebook tufGaming = new Notebook("Tuf Gaming",asus,8199,0,1,"15.6","15.6 GB");
+
+        cellPhones.add(iphone);
+        cellPhones.add(galaxy);
+        cellPhones.add(redmi);
+        notebooks.add(mateBook);
+        notebooks.add(v14IGL);
+        notebooks.add(tufGaming);
     }
 
 
@@ -65,6 +86,14 @@ public class Store {
         }
 
     }
+
+    public void listCellPhones(ArrayList<CellPhone> cellPhones){
+        System.out.println("Telefonlar listeleniyor..");
+        for (CellPhone cellPhone: cellPhones){
+            System.out.println(cellPhone.getName() + ", "  ); //  Continue this think.
+        }
+    }
+
 
     public void listMenu(Set<Brand> brands){
         for (Brand brand: brands){
