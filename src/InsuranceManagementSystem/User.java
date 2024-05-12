@@ -14,6 +14,7 @@ public class User {
     private int age;
     private LocalDate lastLoginDate;
     private List<Address> addressList = new ArrayList<>();
+    private List<Insurance> insuranceList = new ArrayList<>();
     Scanner inp = new Scanner(System.in);
 
     public User(String name, String surname, String email, String password, String job, int age) {
@@ -49,6 +50,8 @@ public class User {
                         account.showInfo();
                     }
                     break;
+                case 3:
+
                 case 0:
                     System.out.println("Uygulamamıza tekrar bekleriz..");
                     isContinue = false;
@@ -64,6 +67,7 @@ public class User {
     public void menu(){
         System.out.println("1- Kullanıcı oluştur");
         System.out.println("2- Kullanıcı bilgilerini göster");
+        System.out.println("3- Giriş Yap");
         System.out.println("0- Çıkış");
         System.out.print("Yapmak istediğiniz işlemi seçiniz : ");
     }

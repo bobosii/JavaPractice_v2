@@ -5,7 +5,9 @@ import java.util.List;
 public class Account {
     private User user;
 
-    public void showInfo(){
+
+
+    public final void showInfo(){
         System.out.println("Adınız : " + user.getName() +
                 ", Soy adınız : " + user.getSurname() +
                 ", Emailiniz : " + user.getEmail() +
@@ -28,6 +30,11 @@ public class Account {
             System.out.println("Adres bilgileriniz bulunmamaktadır.");
         }
     }
+
+    public void login(){
+        
+    }
+
     public Account(User user) {
         super();
         this.user = user;
