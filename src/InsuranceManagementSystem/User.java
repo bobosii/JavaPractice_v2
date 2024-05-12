@@ -42,6 +42,8 @@ public class User {
                 case 1:
                     newUser = createUser();
                     account = new Account(newUser);
+                    AccountManager accountManager = new AccountManager();
+                    accountManager.addAccount(account);
                     System.out.println("Kullanıcı başarılı şekilde oluşturuldu");
                     break;
                 case 2:
@@ -66,6 +68,7 @@ public class User {
                 case 4:
                     if (account != null && account.getAuthenticationStatus() == AuthenticationStatus.SUCCESS) {
                         System.out.println("Sigorta işlemleri !!");
+                        insuranceMenu(account.getUser());
                     } else {
                         System.out.println("Sigorta işlemlerine erişebilmek için giriş yapmalısınız !!");
                     }
@@ -90,6 +93,43 @@ public class User {
         System.out.println("4- Sigorta işlemleri");
         System.out.println("0- Çıkış");
         System.out.print("Yapmak istediğiniz işlemi seçiniz : ");
+    }
+    public void insuranceMenu(User user){
+        Insurance carInsurance = new CarInsurance(100);
+        Insurance healthInsurance = new HealthInsurance(150);
+        Insurance residenceInsurance = new ResidenceInsurance(200);
+        Insurance travelInsurance = new TravelInsurance(250);
+        insuranceList.add(carInsurance);
+        insuranceList.add(healthInsurance);
+        insuranceList.add(residenceInsurance);
+        insuranceList.add(travelInsurance);
+
+//        for (Insurance insurance: insuranceList){
+//            int index = 0;
+//            System.out.println(index++ +": " +insurance.getInsuranceName() + " " + insurance.getInsurancePrice());
+//        }
+        for (int i = 0; i<insuranceList.size();i++){
+            System.out.println(i + "- " + insuranceList.get(i).getInsuranceName() + " " + insuranceList.get(i).getInsurancePrice() + " TL");
+        }
+        System.out.println("Hangi sigortayı yaptırmak istersiniz ?");
+        int choice = inp.nextInt();
+        switch (choice){
+            case 0:
+                System.out.println("Araç Sigortanız başarıyla tanımlanmıştır !!");
+                break;
+            case 1:
+                System.out.println("Sağlık sigortanız başarıyla tanımlanmıştır !!");
+                break;
+            case 2:
+                System.out.println("Konut sigortanız başarıyla tanımlanmıştır !!");
+                break;
+            case 3:
+                System.out.println("Seyahat sigortanız başarıyla tanımlanmıştır !!");
+                break;
+            default:
+                System.out.println("Lütfen doğru seçim yapınız !!!");
+                break;
+        }
     }
 
     public User createUser(){

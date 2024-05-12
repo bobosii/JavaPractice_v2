@@ -1,9 +1,10 @@
 package InsuranceManagementSystem;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
 
-public class Account {
+public class Account implements Comparable<Account>{
     private User user;
     private Scanner inp = new Scanner(System.in);
     AuthenticationStatus authenticationStatus = AuthenticationStatus.FAIL;
@@ -69,5 +70,20 @@ public class Account {
     public void setUser(User user) {
         this.user = user;
     }
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Account account = (Account) o;
+        return Objects.equals(user.getEmail(), account.getUser().getEmail());
+    }
 
+    @Override
+    public int compareTo(Account other) {
+        return this.user.getEmail().compareTo(other.getUser().getEmail());
+    }
+    @Override
+    public int hashCode() {
+        return Objects.hash(user.getEmail());
+    }
 }

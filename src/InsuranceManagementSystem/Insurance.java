@@ -8,7 +8,7 @@ public abstract class Insurance {
     private int insurancePrice;
     private LocalDate startAndFinishDate;
 
-    public Insurance(String insuranceName, int insurancePrice) {
+    public Insurance(String insuranceName,int insurancePrice) {
         this.insuranceName = insuranceName;
         this.insurancePrice = insurancePrice;
         this.startAndFinishDate = LocalDate.now();

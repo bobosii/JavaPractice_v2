@@ -1,8 +1,8 @@
 package InsuranceManagementSystem;
 
 public class CarInsurance extends Insurance{
-    public CarInsurance(String insuranceName, int insurancePrice) {
-        super("Araç Sigortası", insurancePrice);
+    public CarInsurance(int insurancePrice) {
+        super("Araç Sigortası",insurancePrice);
     }
 
     @Override
