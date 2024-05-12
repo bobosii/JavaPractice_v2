@@ -1,10 +1,12 @@
 package InsuranceManagementSystem;
 
 import java.util.List;
+import java.util.Scanner;
 
 public class Account {
     private User user;
-
+    private Scanner inp = new Scanner(System.in);
+    AuthenticationStatus authenticationStatus = AuthenticationStatus.FAIL;
 
 
     public final void showInfo(){
@@ -31,8 +33,27 @@ public class Account {
         }
     }
 
-    public void login(){
-        
+    public void login() throws InvalidAuthenticationException {
+        System.out.println("------GİRİŞ EKRANI-------");
+        System.out.println("Lütfen kayıt olurken kullandığınız emailinizi girin : ");
+        String loginMail = inp.nextLine();
+        System.out.println("Lütfen şifrenizi girin : ");
+        String loginPassword = inp.nextLine();
+        System.out.println("İşleminiz kontrol ediliyor !!");
+        if (user.getEmail().equals(loginMail) && user.getPassword().equals(loginPassword)){
+            System.out.println("Hoş geldiniz " + user.getName() + " " + user.getSurname() + " !");
+            System.out.println("Giriş işleminiz başarılı bir şekilde gerçekleşmiştir");
+            setAuthenticationStatus(AuthenticationStatus.SUCCESS);
+        }else {
+            setAuthenticationStatus(AuthenticationStatus.FAIL);
+            throw new InvalidAuthenticationException("Kullanıcı mailiniz veya şifreniz yanlış !!");
+        }
+    }
+    public void setAuthenticationStatus(AuthenticationStatus authenticationStatus){
+        this.authenticationStatus = authenticationStatus;
+    }
+    public AuthenticationStatus getAuthenticationStatus() {
+        return authenticationStatus;
     }
 
     public Account(User user) {

@@ -33,6 +33,7 @@ public class User {
         int choice;
         boolean isContinue = true;
         User newUser = null;
+        Account account = null; // Account nesnesini dışarıda tanımlayın
         System.out.println("Sigorta yönetim sistemine hoş geldiniz");
         while (isContinue){
             menu();
@@ -40,18 +41,35 @@ public class User {
             switch (choice){
                 case 1:
                     newUser = createUser();
+                    account = new Account(newUser);
                     System.out.println("Kullanıcı başarılı şekilde oluşturuldu");
                     break;
                 case 2:
                     if (newUser == null){
-                        System.out.println("Öncelikle kullanıcı oluşturmalısın !!");
-                    }else {
-                        Account account = new Account(newUser);
+                        System.out.println("Öncelikle kullanıcı oluşturmalısınız !!");
+                    } else {
+
                         account.showInfo();
                     }
                     break;
                 case 3:
-
+                    if (account == null) {
+                        System.out.println("Öncelikle giriş yapmalısınız !!");
+                    } else {
+                        try {
+                            account.login();
+                        } catch (InvalidAuthenticationException e) {
+                            System.out.println(e.getMessage());
+                        }
+                    }
+                    break;
+                case 4:
+                    if (account != null && account.getAuthenticationStatus() == AuthenticationStatus.SUCCESS) {
+                        System.out.println("Sigorta işlemleri !!");
+                    } else {
+                        System.out.println("Sigorta işlemlerine erişebilmek için giriş yapmalısınız !!");
+                    }
+                    break;
                 case 0:
                     System.out.println("Uygulamamıza tekrar bekleriz..");
                     isContinue = false;
@@ -64,10 +82,12 @@ public class User {
     }
 
 
+
     public void menu(){
         System.out.println("1- Kullanıcı oluştur");
         System.out.println("2- Kullanıcı bilgilerini göster");
         System.out.println("3- Giriş Yap");
+        System.out.println("4- Sigorta işlemleri");
         System.out.println("0- Çıkış");
         System.out.print("Yapmak istediğiniz işlemi seçiniz : ");
     }
